@@ -35,13 +35,12 @@ def directory_search(current_directory):
 
     return total_size
 
-
 # Checking the current initial working directory and storing the current working directory
 # in a variable called path
 # User or GTA can also change this file path to another file path on their computer
 # path variable that holds the current working directory
-current_directory = os.getcwd()
+start_directory = os.getcwd()
 
 # print statement that will print the total number of bytes after searching
 # through the current directory
-print("TOTAL SIZE: %d bytes" % directory_search(current_directory))
+print("TOTAL SIZE: %d bytes" % directory_search(start_directory))
