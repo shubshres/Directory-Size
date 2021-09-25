@@ -5,16 +5,7 @@
 # Import Statements
 import os
 
-totalSize = 0
-
-def directory_search():
-
-    # Checking the current initial working directory and storing the current working directory
-    # in a variable called path
-    # User or GTA can also change this file path to another file path on their computer
-    # path variable that holds the current working directory
-    current_directory = os.getcwd()
-
+def directory_search(current_directory):
     # DEBUG printing current directory
     print("\n\t"+current_directory)
 
@@ -25,38 +16,44 @@ def directory_search():
     print("\n\nPRINTING ARRAY \n")
     print(files)
 
-    # going back a directory
-    if files == []:
-        # DEBUG
-        print("EMPTY")
-        os.chdir("..")
-        
-
+    total_size = 0
     # looping through the files in the directory
     for x in files:
-        file_size = 0
-        file_size = os.path.getsize(x)
-       
-        # DEBUG
-        print(x + " is a file and is ", file_size, " bytes")
+        # storing a variable that holds the next path 
+        nextpath = os.path.join(current_directory, x)
 
-        
-        # checking and adding the size of the file to the TotalSize
-        global totalSize
-        totalSize += file_size
-        print("\t\tTotal Size is: %d Bytes" %totalSize)
-
-        if os.path.isdir(x):
+        if os.path.isdir(nextpath):
             # DEBUG
             print("\n\nCHANGING DIRECTORY TO " + x)
 
             #if directory is found, change the directory
-            os.chdir(x)
-            directory_search()
+            total_size+=directory_search(nextpath)
+            
+        elif os.path.isfile(nextpath):
+            file_size = 0
+            file_size = os.path.getsize(nextpath)
+
+            # DEBUG
+            print(x + " is a file and is ", file_size, " bytes")
+
+            # checking and adding the size of the file to the TotalSize
+            total_size += file_size
+    
+    return total_size
 
 
 # DEBUG
 print("\n\n\n\n\nSTARTING HERE")
 
-directory_search()
-print("\n\nTOTAL SIZE: %d BYTES..." %totalSize)
+# Checking the current initial working directory and storing the current working directory
+# in a variable called path
+# User or GTA can also change this file path to another file path on their computer
+# path variable that holds the current working directory
+current_directory = os.getcwd()
+print("\n\nTOTAL SIZE: %d BYTES..." %directory_search(current_directory))
+        
+
+
+
+
+
