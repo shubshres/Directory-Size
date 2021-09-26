@@ -22,24 +22,23 @@ sub DirectorySize
     # initializing array 
     my @files = glob($currentDir);
 
-    print(@files); 
-
+    # iterating through the files
     foreach(@files)
     {
+        # checking if the current file is a file
         if (-f $_) 
         {
-            print("\n\nthis is a file\n\n"); 
+            # incrementing total size by the size of the file
             $localTotalSize += -s $_; 
         }
+        # checking if the current file is a directory
         if (-d $_) 
         {
-            print("\n\nthis is a directory\n\n"); 
+            # recurisively calling the directory size
             $localTotalSize += DirectorySize("$_/*"); 
         }
     }
-
     return $localTotalSize;
-
 }
 
 # "main"
