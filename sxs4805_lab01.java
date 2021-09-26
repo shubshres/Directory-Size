@@ -4,7 +4,6 @@
 
 // Import statements
 import java.io.File;
-import java.lang.ref.Cleaner;
 
 public class sxs4805_lab01 
 {
@@ -18,7 +17,7 @@ public class sxs4805_lab01
         long totalSize = DirectorySize(currentDirectory); 
 
         // Printing out total size in bytes
-        System.out.println("\nTOTAL SIZE: " + totalSize + " bytes\n"); 
+        System.out.println("TOTAL SIZE: " + totalSize + " bytes"); 
     }
 
     public static long DirectorySize(String currentDirectory)
@@ -38,13 +37,13 @@ public class sxs4805_lab01
         for(int i = 0; i < files.length; i++)
         {
             // Creating a variable that holds the next path 
-            File tempFile = new File(currentDirectory + "/" + files[i]); 
+            File tempFile = new File(currentDirectory,files[i]); 
             
             // if the next file is a directory, then we will recusively call this function
             if(tempFile.isDirectory())
             {
                 // if directory is found, we will recursively call directory size
-                totalSize+=DirectorySize(currentDirectory + "/" + files[i]);
+                totalSize+=DirectorySize(tempFile.toString());
             }
             // if the next file is a file, then we will check the size and add it to the total size
             else if(tempFile.isFile())
