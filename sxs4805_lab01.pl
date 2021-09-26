@@ -41,8 +41,6 @@ sub DirectorySize
     return $localTotalSize;
 }
 
-# "main"
-
 # holding the current working directory in variable called cwd
 my $cwd = getcwd();
 
